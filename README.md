@@ -65,14 +65,14 @@ git clone https://github.com/Mubaleghjoss/loker-smaafbs.git laravel-lokersmaafbs
 cd laravel-lokersmaafbs
 cp .env.production.example .env
 nano .env
-bash scripts/ssh-update.sh
+PHP_BIN=/opt/cpanel/ea-php82/root/usr/bin/php bash scripts/ssh-update.sh
 ```
 
 Update berikutnya setelah push ke GitHub:
 
 ```bash
 cd ~/laravel-lokersmaafbs
-bash scripts/ssh-update.sh
+PHP_BIN=/opt/cpanel/ea-php82/root/usr/bin/php bash scripts/ssh-update.sh
 ```
 
 Detail lengkap ada di `DEPLOY_SSH_CPANEL.md`.
