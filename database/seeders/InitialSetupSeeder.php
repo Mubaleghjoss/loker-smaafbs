@@ -15,19 +15,22 @@ class InitialSetupSeeder extends Seeder
         Setting::putValue('admin_whatsapp', env('AFBS_ADMIN_WHATSAPP', '+6283818393029'));
         Setting::putValue('mail_confirm_enabled', env('AFBS_MAIL_CONFIRM_ENABLED', '0'));
 
-        if (AdminUser::query()->count() === 0) {
-            $email = env('AFBS_ADMIN_EMAIL', 'admin@afbs.local');
-            $password = env('AFBS_ADMIN_PASSWORD', 'ChangeMe123!');
-            $name = env('AFBS_ADMIN_NAME', 'Admin AFBS');
+        $email = env('AFBS_ADMIN_EMAIL', 'admin@afbs.local');
+        $password = env('AFBS_ADMIN_PASSWORD', 'ChangeMe123!');
+        $name = env('AFBS_ADMIN_NAME', 'Admin AFBS');
 
-            AdminUser::query()->create([
-                'name' => $name,
-                'email' => $email,
-                'password' => Hash::make($password),
-                'is_super' => true,
-                'permissions' => [],
-            ]);
+        $admin = AdminUser::query()->firstOrNew(['email' => $email]);
+        $isNewAdmin = !$admin->exists;
+
+        $admin->name = $name;
+        $admin->is_super = true;
+        $admin->permissions = [];
+
+        if ($isNewAdmin) {
+            $admin->password = Hash::make($password);
         }
+
+        $admin->save();
 
         if (Position::query()->count() === 0) {
             Position::query()->create([

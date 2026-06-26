@@ -67,6 +67,7 @@ Script akan:
 - otomatis memakai `composer install --no-scripts` jika `proc_open` mati di hosting, lalu menjalankan `php artisan package:discover` manual
 - membuat `APP_KEY` jika masih kosong
 - menjalankan migration MySQL
+- menjalankan seeder awal agar akun admin dari `AFBS_ADMIN_*` dan setting dasar dibuat
 - membuat cache Laravel
 - menyalin isi `public/` ke `~/public_html/web/www.karir`
 - mengganti `~/public_html/web/www.karir/index.php` agar menunjuk ke `~/laravel-lokersmaafbs`
@@ -92,6 +93,14 @@ Lalu ganti nilai `PHP_BIN=...` dengan path yang tersedia.
 ## 4. Catatan Penting
 
 - File `.env` server jangan di-commit ke GitHub.
+- Akun admin awal dibuat dari `AFBS_ADMIN_EMAIL`, `AFBS_ADMIN_PASSWORD`, dan `AFBS_ADMIN_NAME` saat seeder berjalan.
+- Jika database server sudah terlanjur kosong dan login gagal, jalankan:
+
+```bash
+cd ~/laravel-lokersmaafbs
+PHP_BIN=/opt/cpanel/ea-php82/root/usr/bin/php bash scripts/ssh-update.sh
+```
+
 - Folder upload pelamar tetap berada di `~/laravel-lokersmaafbs/storage/app/private`.
 - Document root domain/subdomain di cPanel harus diarahkan ke `public_html/web/www.karir`.
 - Jika hosting tidak punya Composer, jalankan `composer install --no-dev --optimize-autoloader` di lokal lalu upload folder `vendor/` secara manual.

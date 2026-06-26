@@ -77,6 +77,8 @@ PHP_BIN=/opt/cpanel/ea-php82/root/usr/bin/php bash scripts/ssh-update.sh
 
 Detail lengkap ada di `DEPLOY_SSH_CPANEL.md`.
 
+Script deploy akan menjalankan migration dan seeder awal. Jika tabel admin kosong, akun admin dibuat dari `AFBS_ADMIN_EMAIL`, `AFBS_ADMIN_PASSWORD`, dan `AFBS_ADMIN_NAME` di `.env` server.
+
 > Prinsip utama: **build semua di lokal**, lalu upload hasilnya.
 
 ### 1) Buat Database MySQL

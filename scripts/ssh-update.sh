@@ -102,6 +102,7 @@ if grep -q '^APP_KEY=$' .env; then
 fi
 
 "$PHP_BIN" artisan migrate --force
+"$PHP_BIN" artisan db:seed --class=InitialSetupSeeder --force
 "$PHP_BIN" artisan optimize:clear
 "$PHP_BIN" artisan config:cache
 "$PHP_BIN" artisan route:cache
